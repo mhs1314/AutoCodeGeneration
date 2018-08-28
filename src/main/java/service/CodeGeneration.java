@@ -6,30 +6,35 @@ import com.baomidou.mybatisplus.generator.config.*;
 import com.baomidou.mybatisplus.generator.config.converts.MySqlTypeConvert;
 import com.baomidou.mybatisplus.generator.config.po.TableInfo;
 import com.baomidou.mybatisplus.generator.config.rules.DbColumnType;
-import com.baomidou.mybatisplus.generator.config.rules.DbType;
 import com.baomidou.mybatisplus.generator.config.rules.NamingStrategy;
+import config.autoConfig;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Configuration;
 
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-
+@Configuration
 public class CodeGeneration {
-    public void generation(){
+        @Autowired
+        private autoConfig autoConfig;
+
+        public void generation(){
         AutoGenerator mpg = new AutoGenerator();
         // 选择 freemarker 引擎，默认 Veloctiy
         // mpg.setTemplateEngine(ne/FreemarkerTemplateEngine());
 
         // 全局配置
         GlobalConfig gc = new GlobalConfig();
-        gc.setOutputDir("D://company//springCloudAutoTable");
+        gc.setOutputDir(autoConfig.getOutDir());
         gc.setFileOverride(true);
         gc.setActiveRecord(true);// 不需要ActiveRecord特性的请改为false
         gc.setEnableCache(false);// XML 二级缓存
         gc.setBaseResultMap(true);// XML ResultMap
         gc.setBaseColumnList(false);// XML columList
         // .setKotlin(true) 是否生成 kotlin 代码
-        gc.setAuthor("mhs");
+        gc.setAuthor(autoConfig.getAuthor());
 
         // 自定义文件命名，注意 %s 会自动填充表实体属性！
 //         gc.setMapperName("%sDao");
@@ -41,7 +46,7 @@ public class CodeGeneration {
 
         // 数据源配置
         DataSourceConfig dsc = new DataSourceConfig();
-        dsc.setDbType(DbType.MYSQL);
+        dsc.setDbType(autoConfig.getDbType());
         dsc.setTypeConvert(new MySqlTypeConvert(){
             // 自定义数据库表字段类型转换【可选】
             @Override
@@ -51,18 +56,18 @@ public class CodeGeneration {
                 return super.processTypeConvert(fieldType);
             }
         });
-        dsc.setDriverName("com.mysql.jdbc.Driver");
-        dsc.setUsername("root");
-        dsc.setPassword("123456");
-        dsc.setUrl("jdbc:mysql://47.93.225.125:3306/bsshop_dev?characterEncoding=utf8&useSSL=false");
+        dsc.setDriverName(autoConfig.getDriverName());
+        dsc.setUsername(autoConfig.getUserName());
+        dsc.setPassword(autoConfig.getPassword());
+        dsc.setUrl(autoConfig.getUrl());
         mpg.setDataSource(dsc);
 
         // 策略配置
         StrategyConfig strategy = new StrategyConfig();
         // strategy.setCapitalMode(true);// 全局大写命名 ORACLE 注意
-        strategy.setTablePrefix(new String[] { "bs_"});// 此处可以修改为您的表前缀
+        strategy.setTablePrefix(autoConfig.getTablePrefix());// 此处可以修改为您的表前缀
         strategy.setNaming(NamingStrategy.underline_to_camel);// 表名生成策略
-        strategy.setInclude(new String[] {"bs_mac_apply"}); // 需要生成的表	"bs_sla",,"user_match","user_role","user_security","function_right","bs_good_gradient","bs_good_grant"
+        strategy.setInclude(autoConfig.getIncludeTables()); // 需要生成的表	"bs_sla",,"user_match","user_role","user_security","function_right","bs_good_gradient","bs_good_grant"
 
         //"bs_sla","bs_sla_group" "bs_sla","bs_good","bs_good_bank",,"bs_good_idc","bs_good_provision"
         // strategy.setExclude(new String[]{"test"}); // 排除生成的表
@@ -88,7 +93,7 @@ public class CodeGeneration {
 
         // 包配置
         PackageConfig pc = new PackageConfig();
-        pc.setParent("com.julu");
+        pc.setParent(autoConfig.getPackRoot());
         pc.setModuleName("");
         mpg.setPackageInfo(pc);
 
@@ -108,7 +113,7 @@ public class CodeGeneration {
             @Override
             public String outputFile(TableInfo tableInfo) {
                 // 自定义输入文件名称
-                return "D://test//jsp//my_" + tableInfo.getEntityName() + ".jsp";
+                return autoConfig.getOutDir()+"//jsp//my_" + tableInfo.getEntityName() + ".jsp";
             }
         });
         cfg.setFileOutConfigList(focList);
@@ -118,7 +123,7 @@ public class CodeGeneration {
         focList.add(new FileOutConfig("/templates/mapper.xml.vm") {
             @Override
             public String outputFile(TableInfo tableInfo) {
-                return "D://company//springCloudAutoTable//"+ tableInfo.getEntityName() + ".xml";
+                return autoConfig.getOutDir()+"//springCloudAutoTable//"+ tableInfo.getEntityName() + ".xml";
             }
         });
         cfg.setFileOutConfigList(focList);

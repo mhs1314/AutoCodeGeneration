@@ -1,7 +1,10 @@
 package config;
 
+import com.baomidou.mybatisplus.generator.config.rules.DbType;
 import org.springframework.boot.context.properties.ConfigurationProperties;
+import org.springframework.stereotype.Component;
 
+@Component
 @ConfigurationProperties(prefix = "auto")
 public class autoConfig {
     /**
@@ -15,7 +18,7 @@ public class autoConfig {
     /**
      * 数据库类型支持：mysql，oracle，sql_server，postgre_sql
      */
-    private String dbType;
+    private DbType dbType;
     /**
      * 数据库驱动：如：com.mysql.jdbc.Driver
      */
@@ -62,12 +65,17 @@ public class autoConfig {
         this.author = author;
     }
 
-    public String getDbType() {
+    public DbType getDbType() {
         return dbType;
     }
 
     public void setDbType(String dbType) {
-        this.dbType = dbType;
+        switch (dbType){
+            case "mysql":this.dbType=DbType.MYSQL;break;
+            case "oracle":this.dbType=DbType.ORACLE;break;
+            case "sql_server":this.dbType=DbType.SQL_SERVER;break;
+            case "postgre_sql":this.dbType=DbType.POSTGRE_SQL;break;
+        }
     }
 
     public String getDriverName() {
