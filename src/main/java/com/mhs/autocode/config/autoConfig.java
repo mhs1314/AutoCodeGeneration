@@ -1,4 +1,4 @@
-package config;
+package com.mhs.autocode.config;
 
 import com.baomidou.mybatisplus.generator.config.rules.DbType;
 import org.springframework.boot.context.properties.ConfigurationProperties;
@@ -50,7 +50,7 @@ public class autoConfig {
 
 
     public String getOutDir() {
-        return outDir;
+        return outDir==null?"d://autoCode":outDir;
     }
 
     public void setOutDir(String outDir) {
@@ -58,7 +58,7 @@ public class autoConfig {
     }
 
     public String getAuthor() {
-        return author;
+        return author==null?"mhs":author;
     }
 
     public void setAuthor(String author) {
@@ -66,7 +66,7 @@ public class autoConfig {
     }
 
     public DbType getDbType() {
-        return dbType;
+        return dbType==null?DbType.MYSQL:dbType;
     }
 
     public void setDbType(String dbType) {
@@ -79,7 +79,7 @@ public class autoConfig {
     }
 
     public String getDriverName() {
-        return driverName;
+        return driverName==null?"com.mysql.jdbc.Driver":driverName;
     }
 
     public void setDriverName(String driverName) {
@@ -87,7 +87,7 @@ public class autoConfig {
     }
 
     public String getUserName() {
-        return userName;
+        return userName==null?"root":userName;
     }
 
     public void setUserName(String userName) {
@@ -95,7 +95,7 @@ public class autoConfig {
     }
 
     public String getPassword() {
-        return password;
+        return password==null?"123456":password;
     }
 
     public void setPassword(String password) {
@@ -103,7 +103,7 @@ public class autoConfig {
     }
 
     public String getUrl() {
-        return url;
+        return url==null?"":url;
     }
 
     public void setUrl(String url) {
@@ -114,20 +114,20 @@ public class autoConfig {
         return tablePrefix;
     }
 
-    public void setTablePrefix(String[] tablePrefix) {
-        this.tablePrefix = tablePrefix;
+    public void setTablePrefix(String tablePrefix) {
+        this.tablePrefix = tablePrefix.split(",");
     }
 
     public String[] getIncludeTables() {
         return includeTables;
     }
 
-    public void setIncludeTables(String[] includeTables) {
-        this.includeTables = includeTables;
+    public void setIncludeTables(String includeTables) {
+        this.includeTables = includeTables.split(",");
     }
 
     public String getPackRoot() {
-        return packRoot;
+        return packRoot==null?"com.mhs":packRoot;
     }
 
     public void setPackRoot(String packRoot) {

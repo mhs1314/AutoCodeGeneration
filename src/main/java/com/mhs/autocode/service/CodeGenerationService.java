@@ -1,4 +1,4 @@
-package service;
+package com.mhs.autocode.service;
 
 import com.baomidou.mybatisplus.generator.AutoGenerator;
 import com.baomidou.mybatisplus.generator.InjectionConfig;
@@ -7,8 +7,7 @@ import com.baomidou.mybatisplus.generator.config.converts.MySqlTypeConvert;
 import com.baomidou.mybatisplus.generator.config.po.TableInfo;
 import com.baomidou.mybatisplus.generator.config.rules.DbColumnType;
 import com.baomidou.mybatisplus.generator.config.rules.NamingStrategy;
-import config.autoConfig;
-import org.springframework.beans.factory.annotation.Autowired;
+import com.mhs.autocode.config.autoConfig;
 import org.springframework.context.annotation.Configuration;
 
 import java.util.ArrayList;
@@ -16,11 +15,9 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 @Configuration
-public class CodeGeneration {
-        @Autowired
-        private autoConfig autoConfig;
+public class CodeGenerationService {
 
-        public void generation(){
+        public  CodeGenerationService(autoConfig autoConfig){
         AutoGenerator mpg = new AutoGenerator();
         // 选择 freemarker 引擎，默认 Veloctiy
         // mpg.setTemplateEngine(ne/FreemarkerTemplateEngine());
@@ -151,5 +148,6 @@ public class CodeGeneration {
 
         // 打印注入设置【可无】
         System.err.println(mpg.getCfg().getMap().get("abc"));
-    }
+
+        }
 }
