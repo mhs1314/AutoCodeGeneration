@@ -6,7 +6,7 @@ import org.springframework.stereotype.Component;
 
 @Component
 @ConfigurationProperties(prefix = "auto")
-public class autoConfig {
+public class AutoConfig {
     /**
      * 输出代码地址
      */

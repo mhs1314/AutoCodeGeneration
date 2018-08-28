@@ -7,9 +7,8 @@ import com.baomidou.mybatisplus.generator.config.converts.MySqlTypeConvert;
 import com.baomidou.mybatisplus.generator.config.po.TableInfo;
 import com.baomidou.mybatisplus.generator.config.rules.DbColumnType;
 import com.baomidou.mybatisplus.generator.config.rules.NamingStrategy;
-import com.mhs.autocode.config.autoConfig;
 import org.springframework.context.annotation.Configuration;
-
+import com.mhs.autocode.config.AutoConfig;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -17,7 +16,7 @@ import java.util.Map;
 @Configuration
 public class CodeGenerationService {
 
-        public  CodeGenerationService(autoConfig autoConfig){
+        public  CodeGenerationService(AutoConfig autoConfig){
         AutoGenerator mpg = new AutoGenerator();
         // 选择 freemarker 引擎，默认 Veloctiy
         // mpg.setTemplateEngine(ne/FreemarkerTemplateEngine());
