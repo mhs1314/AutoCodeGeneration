@@ -4,7 +4,6 @@ import com.baomidou.mybatisplus.generator.config.rules.DbType;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.stereotype.Component;
 
-@Component
 @ConfigurationProperties(prefix = "auto")
 public class AutoConfig {
     /**

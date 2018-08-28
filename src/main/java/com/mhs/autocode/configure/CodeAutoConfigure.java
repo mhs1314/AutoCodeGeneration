@@ -20,8 +20,8 @@ public class CodeAutoConfigure {
     @Bean
     @ConditionalOnMissingBean
     @ConditionalOnProperty(prefix = "auto",value = "enabled",havingValue = "true")
-    void exampleService (){
-      new CodeGenerationService(properties);
+    CodeGenerationService exampleService (){
+     return new CodeGenerationService(properties);
     }
 
 }
